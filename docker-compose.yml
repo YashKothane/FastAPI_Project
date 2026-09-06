@@ -11,3 +11,17 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  backend:
+    build: ./backend
+    container_name: fastapi-blog
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - REDIS_HOST=redis
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - redis
+      - rabbitmq
