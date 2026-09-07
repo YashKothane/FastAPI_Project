@@ -1,6 +1,9 @@
 import pika
 import json
-connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
+import os
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(host=os.environ.get("RABBITMQ_HOST", "localhost"))
+)
 channel = connection.channel()
 
 channel.queue_declare(queue="test_queue")
