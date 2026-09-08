@@ -2,7 +2,11 @@ from sqlalchemy import String, Integer, DateTime, ForeignKey, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import create_engine
 
-engine = create_engine("sqlite:///app.db", echo=False)
+import os
+from sqlalchemy import create_engine
+
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///app.db")
+engine = create_engine(DATABASE_URL, echo=False)
 
 
 class Base(DeclarativeBase):
